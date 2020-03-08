@@ -1,8 +1,8 @@
-import React from "react";
-import useTouch from "./useTouch";
-import useSlides from "./useSlides";
-import useNavigation from "./useNavigation";
-import useItemSize from "./useItemSize";
+import React from 'react';
+import useTouch from './useTouch';
+import useSlides from './useSlides';
+import useNavigation from './useNavigation';
+import useItemSize from './useItemSize';
 
 export interface RenderProps {
   slides: React.ReactElement;
@@ -20,12 +20,12 @@ export interface RenderProps {
 }
 
 export interface CarouselProps {
-  children: React.ReactElement;
-  slidesToShow: number;
-  infinite: boolean;
-  transitionDuration: number;
-  centerCurrentSlide: boolean;
-  render: (props: RenderProps) => React.ReactElement;
+  children?: React.ReactElement | React.ReactElement[];
+  slidesToShow?: number;
+  infinite?: boolean;
+  transitionDuration?: number;
+  centerCurrentSlide?: boolean;
+  render?: (props: RenderProps) => React.ReactElement;
 }
 
 const Carousel: React.FC<CarouselProps> = (
@@ -42,7 +42,7 @@ const Carousel: React.FC<CarouselProps> = (
   const { slides, slideCount, preSlidesCount } = useSlides(children, {
     infinite,
     slidesToShow,
-    mode: "flex"
+    mode: 'flex'
   });
 
   const navigation = useNavigation({
@@ -76,8 +76,8 @@ const Carousel: React.FC<CarouselProps> = (
       }
     },
     slidesToShow,
-    measure: "width",
-    mode: "flex"
+    measure: 'width',
+    mode: 'flex'
   });
 
   React.useEffect(() => {
@@ -149,8 +149,8 @@ const Carousel: React.FC<CarouselProps> = (
     slides: (
       <div
         style={{
-          width: "100%",
-          overflow: "hidden"
+          width: '100%',
+          overflow: 'hidden'
         }}
         ref={wrapper}
       >
@@ -164,13 +164,13 @@ const Carousel: React.FC<CarouselProps> = (
           onMouseLeave={onTouchEnd}
           onClickCapture={onClickCapture}
           style={{
-            display: "flex",
-            flexDirection: "row",
+            display: 'flex',
+            flexDirection: 'row',
             transform: `translateX(${
               itemSize ? `${offset}px` : `${initialOffset}%`
             })`,
             transition: `transform ${transition}ms ease`,
-            touchAction: "pan-y pinch-zoom"
+            touchAction: 'pan-y pinch-zoom'
           }}
         >
           {slides}
